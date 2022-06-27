@@ -17,7 +17,6 @@ public class App {
 
     @RequestMapping("/home")
     public String index(){
-
         return "index";
     }
 }
