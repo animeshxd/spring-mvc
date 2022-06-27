@@ -8,6 +8,6 @@
 </head>
 <body>
     <h2> Index Page </h2>
-
+	<%= request.getAttribute("data") %>
 </body>
 </html>
