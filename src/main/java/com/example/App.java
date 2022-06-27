@@ -14,4 +14,10 @@ public class App {
         System.out.println("got response");
         resp.getWriter().println("hello World");
     }
+
+    @RequestMapping("/home")
+    public String index(){
+
+        return "index";
+    }
 }
