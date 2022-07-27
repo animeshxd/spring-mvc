@@ -1,1 +1,1 @@
-mvn clean package tomcat7:run
+mvn clean package tomcat7:run -DskipTests -Dmaven.test.skip -Dmaven.artifact.threads=30 
