@@ -1,12 +1,18 @@
 package com.example;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 
 @Controller
 public class App {
@@ -27,6 +33,25 @@ public class App {
     public ModelAndView page() {
     	ModelAndView modelAndView = new ModelAndView("page");
     	modelAndView.addObject("data", "This is from App.page()");
+    	return modelAndView;
+    }
+    
+    @RequestMapping("/more")
+    public ModelAndView more() {
+    	var modelAndView = new ModelAndView("more");
+    	
+    	modelAndView.addObject("string", "Hello String");
+    	
+    	modelAndView.addObject("_int", 1234);
+    	
+    	var list = List.of("A", "B", "C", "D");
+    	modelAndView.addObject("list", list);
+    	
+    	
+    	var datetime = LocalDateTime.now();
+    	modelAndView.addObject("datetime", datetime);	
+    	
+    	
     	return modelAndView;
     }
 }
