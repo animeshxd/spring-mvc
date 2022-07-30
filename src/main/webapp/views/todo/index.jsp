@@ -13,6 +13,7 @@
 	<div style="justify-content: space-between; display: flex;">
 	<h3>List</h3> <a href="">refresh</a>
 	</div>
+	<div>
 	<hr style="margin-top: 5px;">
 	<ul>
 		<c:forEach var="i" items="${data}"> 
@@ -26,7 +27,10 @@
 		<br>
 		<button type="submit">add item</button>
 	</form>
-	
+	</div>
+	<div>
+		<button onclick="fetch('./clear', {method: 'DELETE'}).then((r) => window.location.reload())"> clear</button>
+	</div>
  
 	
 	
