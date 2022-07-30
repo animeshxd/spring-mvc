@@ -13,7 +13,7 @@
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <constructor-arg name="prefix" value="/views/"/>
-        <constructor-arg name="suffix" value=".jsp"/>
+        <constructor-arg name="suffix" value=""/>
     </bean>
     <context:annotation-config />
     <context:component-scan base-package="com.example" />
