@@ -22,9 +22,9 @@
 	<br>
 	<p>Add Items</p>
 	<form action="" method="post">
-		<input type="text" name="data">
+		<input type="text" name="data" autofocus="true">
 		<br>
-		<button type="submit">submit</button>
+		<button type="submit">add item</button>
 	</form>
 	
  
