@@ -29,19 +29,19 @@ public class App {
     @RequestMapping("/home")
     public String index(Model model){
     	model.addAttribute("data", "this data is from A.index() ");
-        return "index";
+        return "index.jsp";
     }
     
     @RequestMapping("/page")
     public ModelAndView page() {
-    	ModelAndView modelAndView = new ModelAndView("page");
+    	ModelAndView modelAndView = new ModelAndView("page.jsp");
     	modelAndView.addObject("data", "This is from App.page()");
     	return modelAndView;
     }
     
     @RequestMapping("/more")
     public ModelAndView more() {
-    	var modelAndView = new ModelAndView("more");
+    	var modelAndView = new ModelAndView("more.jsp");
     	
     	modelAndView.addObject("string", "Hello String");
     	
