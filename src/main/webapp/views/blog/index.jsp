@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,8 +36,14 @@
 	}
 	
 	.posts a {
+		text-decoration: none;
+		color: maroon;
+	}
+	.posts a.custom {
 		font-size: 12px;
 	}
+	
+
 	
 </style>
 </head>
@@ -48,12 +55,13 @@
 	
 	<div class="posts">
 		<div>
-		<c:forEach var="i" items="${blogs}">
-			<h4>${i.value.title}</h4>
-			<p>${i.value.content}</p>
-			<a href="delete?id=${i.key}">delete</a>
-			<hr>
-		</c:forEach>
+			<c:forEach var="i" items="${blogs}">
+				<c:set var="content" value="${i.value.content}"></c:set>
+				<h4><a href="post?id=${i.value.id}">${i.value.title}</a></h4>
+				<p>${fn:substring(content, 0, 200)}</p>
+				<a class="custom" href="delete?id=${i.key}">delete</a>
+				<hr>
+			</c:forEach>
 		</div>
 	</div>
 </body>

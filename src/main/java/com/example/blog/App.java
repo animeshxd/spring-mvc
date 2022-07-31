@@ -50,7 +50,17 @@ public class App {
 	@GetMapping("/delete")
 	public void delete(@RequestParam("id") String id, HttpServletResponse resp) throws Exception {
 		blogs.remove(id);
-		resp.sendRedirect("../blog/");
+		resp.sendRedirect("./");
+	}
+	
+	@GetMapping("/post")
+	public String viewpost(@RequestParam("id") String id, Model model) {
+		var blog = blogs.get(id);
+		if (blog == null) {
+			return "blog/index.jsp";
+		}
+		model.addAttribute("blog", blog);
+		return "blog/post.jsp";
 	}
 	
 }
