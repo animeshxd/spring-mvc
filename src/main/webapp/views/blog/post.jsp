@@ -39,6 +39,13 @@
 		font-size: 12px;
 	}
 	
+	.success {
+		font-size: 14px;
+		padding: 12px;
+		background-color: MediumAquaMarine;
+		border: 12px;
+	}
+	
 </style>
 </head>
 <body>
@@ -47,6 +54,10 @@
 		<a href="create">Create Blog Post</a>
 	</div>
 	<div class="post">
+		<c:if test="${success}">
+			<div class="success">Successfully created post</div>
+		</c:if>
+		
 		<h4>${blog.title}</h4>
 		<p>${blog.content}</p>
 		<a class="custom" href="delete?id=${blog.id}">delete</a>

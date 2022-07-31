@@ -35,16 +35,18 @@ public class App {
 	}
 	
 	@PostMapping("/create")
-	public void addblog(
+	public String addblog(
 			@RequestParam("title") String title,
 			@RequestParam("content") String content,
-			HttpServletResponse resp
+			Model model
 			) throws Exception {
 		
 		var id = UUID.randomUUID();
 		var blogpost = new Blog(id.toString(), title, content);
 		blogs.put(id.toString(), blogpost);
-		resp.sendRedirect("../blog/");
+		model.addAttribute("blog", blogpost);
+		model.addAttribute("success", true);
+		return "blog/post.jsp";
 	}
 	
 	@GetMapping("/delete")
