@@ -59,7 +59,7 @@
 		</c:if>
 		
 		<h4>${blog.title}</h4>
-		<p>${blog.content}</p>
+		<p>${fn:escapeXml(blog.content)}</p>
 		<a class="custom" href="delete?id=${blog.id}">delete</a>
 		<hr>
 	</div>

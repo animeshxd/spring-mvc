@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.blog.models.Blog;
 
-import jakarta.servlet.http.HttpServletResponse;
-
 @Controller
 @RequestMapping("/blog")
 public class App {
@@ -50,9 +48,15 @@ public class App {
 	}
 	
 	@GetMapping("/delete")
-	public void delete(@RequestParam("id") String id, HttpServletResponse resp) throws Exception {
-		blogs.remove(id);
-		resp.sendRedirect("./");
+	public String delete(@RequestParam("id") String id, Model model) throws Exception {
+		var blog = blogs.remove(id);
+		if (blog == null) {
+			model.addAttribute("success", false);
+		}else {
+			model.addAttribute("success", true);
+		}
+		model.addAttribute("blogs", blogs);
+		return "blog/index.jsp";
 	}
 	
 	@GetMapping("/post")

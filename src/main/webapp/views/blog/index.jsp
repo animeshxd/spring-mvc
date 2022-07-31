@@ -43,22 +43,31 @@
 		font-size: 12px;
 	}
 	
+	.success {
+		font-size: 14px;
+		padding: 12px;
+		background-color: DarkSalmon;
+		border: 12px;
+	}
 
 	
 </style>
 </head>
 <body>
 	<div class="nav">
-		<a href="">Home</a>
+		<a href="./">Home</a>
 		<a href="create">Create Blog Post</a>
 	</div>
 	
 	<div class="posts">
+		<c:if test="${success}">
+			<div class="success">Successfully deleted post</div>
+		</c:if>
 		<div>
 			<c:forEach var="i" items="${blogs}">
 				<c:set var="content" value="${i.value.content}"></c:set>
 				<h4><a href="post?id=${i.value.id}">${i.value.title}</a></h4>
-				<p>${fn:substring(content, 0, 200)}</p>
+				<p>${fn:escapeXml(fn:substring(content, 0, 200))}</p>
 				<a class="custom" href="delete?id=${i.key}">delete</a>
 				<hr>
 			</c:forEach>
