@@ -10,8 +10,6 @@
 <style type="text/css">
 	body {
 		background-color: cornsilk;
-
-
 	}
 </style>
 </head>
@@ -19,10 +17,9 @@
 
 <body>
 	<form action="create" method="post">
-		<input type="text" name="id" value="${id}" hidden/>
-		Title:  <input type="text" name="title" required="required" value="${blog.title}"/><br>
+		Title:  <input type="text" name="title" required="required"/><br>
 		<p> Content: </p>
-		<textarea rows="10" cols="70" style="max-width: 98%;" name="content" required="required">${blog.content}</textarea>
+		<textarea rows="10" cols="70" name="content" required="required"></textarea>
 		<br><br>
 		<button>Submit Post</button>
 	</form>

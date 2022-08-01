@@ -67,9 +67,12 @@
 		<div>
 			<c:forEach var="i" items="${blogs}">
 				<c:set var="content" value="${i.value.content}"></c:set>
-				<h4><a href="post?id=${i.value.id}">${i.value.title}</a></h4>
+				<h4><a href="post?id=${i.value.id}">${fn:escapeXml(i.value.title)}</a></h4>
 				<p>${fn:escapeXml(fn:substring(content, 0, 200))}</p>
-				<a class="custom" href="delete?id=${i.key}">delete</a>
+				<span>
+					<a class="custom" href="delete?id=${i.value.id}">delete</a>
+					<a class="custom" href="edit?id=${i.value.id}">edit</a>
+				</span>
 				<hr>
 			</c:forEach>
 		</div>

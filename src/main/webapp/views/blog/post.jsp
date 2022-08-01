@@ -59,9 +59,12 @@
 			<div class="success">Successfully created post</div>
 		</c:if>
 		
-		<h4>${blog.title}</h4>
+		<h4>${fn:escapeXml(blog.title)}</h4>
 		<p>${fn:escapeXml(blog.content)}</p>
-		<a class="custom" href="delete?id=${blog.id}">delete</a>
+		<span>
+			<a class="custom" href="delete?id=${blog.id}">delete</a>
+			<a class="custom" href="edit?id=${blog.id}">edit</a>
+		</span>
 		<hr>
 	</div>
 </body>

@@ -28,21 +28,25 @@ public class App {
 	
 	
 	@GetMapping("/create")
-	public String create() {
+	public String create(Model model) {
+		var id = UUID.randomUUID().toString();
+		model.addAttribute("id", id);
+		var blog = blogs.get(id);
+		if (blog != null)
+			model.addAttribute("blog", blog);
 		return "blog/create.jsp";
 	}
 	
 	@PostMapping("/create")
 	public String addblog(
+			@RequestParam("id") String id,
 			@RequestParam("title") String title,
 			@RequestParam("content") String content,
 			Model model
 			) throws Exception {
-		
-		var id = UUID.randomUUID();
-		var blogpost = new Blog(id.toString(), title, content);
-		blogs.put(id.toString(), blogpost);
-		model.addAttribute("blog", blogpost);
+		var blog = new Blog(id, title, content);
+		blogs.put(id, blog);
+		model.addAttribute("blog", blog);
 		model.addAttribute("success", true);
 		return "blog/post.jsp";
 	}
@@ -67,6 +71,19 @@ public class App {
 		}
 		model.addAttribute("blog", blog);
 		return "blog/post.jsp";
+	}
+
+
+	@GetMapping("/edit")
+	public String editPost(@RequestParam("id") String id, Model model){
+		var blog = blogs.get(id);
+		model.addAttribute("id", id);
+		if (blog == null){
+			return "blog/create.jsp";
+		}
+		model.addAttribute("blog", blog);
+		return "blog/create.jsp";
+
 	}
 	
 }
