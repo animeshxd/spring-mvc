@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,14 +39,10 @@ public class App {
 	
 	@PostMapping("/create")
 	public String addblog(
-			@RequestParam("id") String id,
-			@RequestParam("title") String title,
-			@RequestParam("content") String content,
+			@ModelAttribute("blog") Blog blog,
 			Model model
 			) throws Exception {
-		var blog = new Blog(id, title, content);
-		blogs.put(id, blog);
-		model.addAttribute("blog", blog);
+		blogs.put(blog.id, blog);
 		model.addAttribute("success", true);
 		return "blog/post.jsp";
 	}
