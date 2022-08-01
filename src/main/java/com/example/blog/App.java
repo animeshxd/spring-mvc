@@ -1,9 +1,8 @@
 package com.example.blog;
 
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,7 @@ import com.example.blog.models.Blog;
 @RequestMapping("/blog")
 public class App {
 	
-	Map<String, Blog> blogs = new ConcurrentHashMap<String, Blog>();
+	Map<String, Blog> blogs = new TreeMap<String, Blog>();
 	
 	
 	@GetMapping("/")
