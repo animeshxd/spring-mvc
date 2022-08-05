@@ -1,8 +1,8 @@
 package com.example.blog;
 
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,18 +11,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.blog.database.Manager;
 import com.example.blog.models.Blog;
 
 @Controller
 @RequestMapping("/blog")
 public class App {
-	
-	Map<String, Blog> blogs = new TreeMap<String, Blog>();
-	
-	
+	private Manager blogs;
+
+	@Autowired
+	public void setBlogs(Manager blogs) {
+		this.blogs = blogs;
+	}
+
 	@GetMapping("/")
 	public String index(Model model) {
-		model.addAttribute("blogs", blogs);
+		model.addAttribute("blogs", blogs.get());
 		return "blog/index.jsp";
 	}
 	
@@ -42,7 +46,7 @@ public class App {
 			@ModelAttribute("blog") Blog blog,
 			Model model
 			) throws Exception {
-		blogs.put(blog.id, blog);
+		blogs.put(blog);
 		model.addAttribute("success", true);
 		return "blog/post.jsp";
 	}
@@ -50,12 +54,12 @@ public class App {
 	@GetMapping("/delete")
 	public String delete(@RequestParam("id") String id, Model model) throws Exception {
 		var blog = blogs.remove(id);
-		if (blog == null) {
+		if (blog == 0) {
 			model.addAttribute("success", false);
 		}else {
 			model.addAttribute("success", true);
 		}
-		model.addAttribute("blogs", blogs);
+		model.addAttribute("blogs", blogs.get());
 		return "blog/index.jsp";
 	}
 	

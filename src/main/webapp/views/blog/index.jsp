@@ -66,12 +66,12 @@
 		</c:if>
 		<div>
 			<c:forEach var="i" items="${blogs}">
-				<c:set var="content" value="${i.value.content}"></c:set>
-				<h4><a href="post?id=${i.value.id}">${fn:escapeXml(i.value.title)}</a></h4>
+				<c:set var="content" value="${i.content}"></c:set>
+				<h4><a href="post?id=${i.id}">${fn:escapeXml(i.title)}</a></h4>
 				<p>${fn:escapeXml(fn:substring(content, 0, 200))}</p>
 				<span>
-					<a class="custom" href="delete?id=${i.value.id}">delete</a>
-					<a class="custom" href="edit?id=${i.value.id}">edit</a>
+					<a class="custom" href="delete?id=${i.id}">delete</a>
+					<a class="custom" href="edit?id=${i.id}">edit</a>
 				</span>
 				<hr>
 			</c:forEach>
