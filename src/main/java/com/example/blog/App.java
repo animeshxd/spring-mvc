@@ -17,16 +17,16 @@ import com.example.blog.models.Blog;
 @Controller
 @RequestMapping("/blog")
 public class App {
-	private Manager blogs;
+	private Manager<Blog> blogs;
 
 	@Autowired
-	public void setBlogs(Manager blogs) {
+	public void setBlogs(Manager<Blog> blogs) {
 		this.blogs = blogs;
 	}
 
 	@GetMapping("/")
 	public String index(Model model) {
-		model.addAttribute("blogs", blogs.get());
+		model.addAttribute("blogs", blogs.read());
 		return "blog/index.jsp";
 	}
 	
@@ -35,7 +35,7 @@ public class App {
 	public String create(Model model) {
 		var id = UUID.randomUUID().toString();
 		model.addAttribute("id", id);
-		var blog = blogs.get(id);
+		var blog = blogs.read(id);
 		if (blog != null)
 			model.addAttribute("blog", blog);
 		return "blog/create.jsp";
@@ -46,26 +46,26 @@ public class App {
 			@ModelAttribute("blog") Blog blog,
 			Model model
 			) throws Exception {
-		blogs.put(blog);
+		blogs.create(blog);
 		model.addAttribute("success", true);
 		return "blog/post.jsp";
 	}
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam("id") String id, Model model) throws Exception {
-		var blog = blogs.remove(id);
+		var blog = blogs.delete(id);
 		if (blog == 0) {
 			model.addAttribute("success", false);
 		}else {
 			model.addAttribute("success", true);
 		}
-		model.addAttribute("blogs", blogs.get());
+		model.addAttribute("blogs", blogs.read());
 		return "blog/index.jsp";
 	}
 	
 	@GetMapping("/post")
 	public String viewpost(@RequestParam("id") String id, Model model) {
-		var blog = blogs.get(id);
+		var blog = blogs.read(id);
 		if (blog == null) {
 			return "blog/index.jsp";
 		}
@@ -76,7 +76,7 @@ public class App {
 
 	@GetMapping("/edit")
 	public String editPost(@RequestParam("id") String id, Model model){
-		var blog = blogs.get(id);
+		var blog = blogs.read(id);
 		model.addAttribute("id", id);
 		if (blog == null){
 			return "blog/create.jsp";

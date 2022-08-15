@@ -2,14 +2,14 @@ package com.example.blog.database;
 
 import java.util.List;
 
-import com.example.blog.models.Blog;
+import com.example.blog.models.Model;
 
-public interface Manager {
+public interface Manager<T extends Model> {
     public void init();
-    public int  put(Blog blog);
-    public int  update(Blog blog);
-    public int  remove(String id);
-    public Blog get(String id);
-    public List<Blog> get();
+    public int  create(T model);
+    public int  update(T model);
+    public int  delete(String id);
+    public T read(String id);
+    public List<T> read();
 
 }

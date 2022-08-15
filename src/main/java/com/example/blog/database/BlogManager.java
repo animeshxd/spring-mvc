@@ -8,11 +8,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.blog.models.Blog;
-
 import jakarta.annotation.PostConstruct;
 
 @Repository("blogs")
-public class BlogManager implements Manager {
+public class BlogManager implements Manager<Blog> {
 
     private final JdbcTemplate jdbc;
 
@@ -34,25 +33,27 @@ public class BlogManager implements Manager {
     }
 
     @Override
-    public int put(Blog blog) {
+    public int create(Blog blog) {
+
         String sql = "INSERT INTO Blogs(id,title,content) VALUES (?,?,?) ON CONFLICT (id) DO UPDATE SET title = ?, content = ?";
         return jdbc.update(sql, blog.id, blog.title, blog.content, blog.title, blog.content);
     }
 
     @Override
     public int update(Blog blog) {
+        blog = (Blog)blog;
         String sql = "UPDATE Blogs SET title = ?, content = ? WHERE id = ?";
         return jdbc.update(sql, blog.title, blog.content, blog.id);
     }
 
     @Override
-    public int remove(String id) {
+    public int delete(String id) {
         String sql = "DELETE FROM Blogs WHERE id = ?";
         return jdbc.update(sql, id);
     }
 
     @Override
-    public Blog get(String id) {
+    public Blog read(String id) {
         try {
             Blog blog = jdbc.queryForObject(
                     "SELECT * FROM Blogs WHERE id = ?",
@@ -66,7 +67,7 @@ public class BlogManager implements Manager {
     }
 
     @Override
-    public List<Blog> get() {
+    public List<Blog> read() {
         return jdbc.query("SELECT * FROM Blogs",
                 (rs, rowNum) -> new Blog(rs.getString(1), rs.getString(2), rs.getString(3)));
     }

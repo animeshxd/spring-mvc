@@ -1,6 +1,6 @@
 package com.example.blog.models;
 
-public class Blog {
+public class Blog extends Model{
 	
 	public Blog(String id, String title, String content) {
 		this.id = id;
