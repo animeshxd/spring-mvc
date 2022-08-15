@@ -26,7 +26,9 @@ public class BlogManager implements Manager<Blog> {
                     CREATE TABLE IF NOT EXISTS Blogs (
                         id CHAR(36) PRIMARY KEY,
                         title TEXT,
-                        content TEXT
+                        content TEXT,
+                        author VARCHAR(32),
+                        FOREIGN KEY(author) REFERENCES Users(username)
                     )
                 """.strip();
         jdbc.update(sql);
@@ -35,8 +37,8 @@ public class BlogManager implements Manager<Blog> {
     @Override
     public int create(Blog blog) {
 
-        String sql = "INSERT INTO Blogs(id,title,content) VALUES (?,?,?) ON CONFLICT (id) DO UPDATE SET title = ?, content = ?";
-        return jdbc.update(sql, blog.id, blog.title, blog.content, blog.title, blog.content);
+        String sql = "INSERT INTO Blogs(id,title,content,author) VALUES (?,?,?,?) ON CONFLICT (id) DO UPDATE SET title = ?, content = ?";
+        return jdbc.update(sql, blog.id, blog.title, blog.content, blog.title, blog.content, blog.author);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class BlogManager implements Manager<Blog> {
         try {
             Blog blog = jdbc.queryForObject(
                     "SELECT * FROM Blogs WHERE id = ?",
-                    (rs, rowNum) -> new Blog(rs.getString(1), rs.getString(2), rs.getString(3)),
+                    (rs, rowNum) -> new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)),
                     id);
             return blog;
         } catch (EmptyResultDataAccessException e) {
@@ -66,9 +68,15 @@ public class BlogManager implements Manager<Blog> {
     }
 
     @Override
-    public List<Blog> read() {
+    public List<Blog> list() {
         return jdbc.query("SELECT * FROM Blogs",
-                (rs, rowNum) -> new Blog(rs.getString(1), rs.getString(2), rs.getString(3)));
+                (rs, rowNum) -> new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+    }
+
+    @Override
+    public List<Blog> list(String author) {
+        return jdbc.query("SELECT * FROM Blogs WHERE author = ?",
+                (rs, rowNum) -> new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)), author);
     }
 
 }

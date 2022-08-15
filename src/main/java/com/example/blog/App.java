@@ -26,7 +26,7 @@ public class App {
 
 	@GetMapping("/")
 	public String index(Model model) {
-		model.addAttribute("blogs", blogs.read());
+		model.addAttribute("blogs", blogs.list());
 		return "blog/index.jsp";
 	}
 	
@@ -59,7 +59,7 @@ public class App {
 		}else {
 			model.addAttribute("success", true);
 		}
-		model.addAttribute("blogs", blogs.read());
+		model.addAttribute("blogs", blogs.list());
 		return "blog/index.jsp";
 	}
 	

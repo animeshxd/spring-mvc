@@ -2,17 +2,26 @@ package com.example.blog.models;
 
 public class Blog extends Model{
 	
-	public Blog(String id, String title, String content) {
+	public Blog(String id, String title, String content, String author) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
+		this.author = author;
 	}
 	
 	public String id;
 	public String title;
 	public String content;
+	public String author = "guest";
 	
-	public String getId() {
+	public String getAuthor() {
+        return author;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+	
+    public String getId() {
 		return id;
 	}
 	public void setId(String id) {
