@@ -41,7 +41,6 @@ public class BlogManager implements Manager<Blog> {
 
     @Override
     public int update(Blog blog) {
-        blog = (Blog)blog;
         String sql = "UPDATE Blogs SET title = ?, content = ? WHERE id = ?";
         return jdbc.update(sql, blog.title, blog.content, blog.id);
     }
