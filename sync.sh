@@ -11,10 +11,11 @@ else
     echo "synchronizing..."
     cp -r src/main/webapp/* target/spring-mvc/
     cp -r target/classes target/spring-mvc/WEB-INF/
-    echo "synchronized"
+    
 fi
 
 cp -r target/spring-mvc $CATALINA_HOME/webapps/
+echo "synchronized"
 
 TPID="$(ps -ef | awk '/[t]omcat/{print $2}')"
 
