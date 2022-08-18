@@ -1,0 +1,13 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "emeraldwalk.runonsave":{
+        
+        "commands": [
+            {
+                "cmd": "./sync.sh",
+                "match": "src"
+            }
+        ]
+    }
+    
+}
