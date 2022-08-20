@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.blog.database.Manager;
-import com.example.blog.models.Blog;
+import com.example.database.Manager;
+import com.example.models.Blog;
 
 @Controller
 @RequestMapping("/blog")
