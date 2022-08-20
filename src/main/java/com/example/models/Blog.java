@@ -1,5 +1,8 @@
 package com.example.models;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Blog extends Model{
 	
 	public Blog(String id, String title, String content, String author) {
@@ -14,6 +17,18 @@ public class Blog extends Model{
 	public String content;
 	public String author = "guest";
 	
+	public Blog(ResultSet rs) {
+		try {
+			this.id = rs.getString("id");
+			this.title = rs.getString("title");
+			this.content = rs.getString("content");
+			this.author = rs.getString("author");
+		} catch (SQLException e) {}
+
+	}
+
+	public Blog(){}
+
 	public String getAuthor() {
         return author;
     }

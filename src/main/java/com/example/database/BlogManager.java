@@ -39,7 +39,7 @@ public class BlogManager implements Manager<Blog> {
     public int create(Blog blog) {
 
         String sql = "INSERT INTO Blogs(id,title,content,author) VALUES (?,?,?,?) ON CONFLICT (id) DO UPDATE SET title = ?, content = ?";
-        return jdbc.update(sql, blog.id, blog.title, blog.content, blog.title, blog.content, blog.author);
+        return jdbc.update(sql, blog.id, blog.title, blog.content, blog.author, blog.title, blog.content);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class BlogManager implements Manager<Blog> {
         try {
             Blog blog = jdbc.queryForObject(
                     "SELECT * FROM Blogs WHERE id = ?",
-                    (rs, rowNum) -> new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)),
+                    (rs, rowNum) -> new Blog(rs),
                     id);
             return blog;
         } catch (EmptyResultDataAccessException e) {
