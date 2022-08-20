@@ -20,8 +20,8 @@ echo "synchronized"
 TPID="$(ps -ef | awk '/[t]omcat/{print $2}')"
 
 if ! [ $TPID -gt 0 ]; then
-    echo "starting..."
-    $CATALINA_HOME/bin/catalina.sh run
+    echo "[tomcat] starting..."
+    $CATALINA_HOME/bin/catalina.sh start
     exit 0
 fi
 

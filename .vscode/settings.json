@@ -5,9 +5,11 @@
         "commands": [
             {
                 "cmd": "./sync.sh",
-                "match": "src"
+                "match": "src",
+                "isAsync": true
             }
         ]
-    }
+    },
+    "files.autoSave": "afterDelay"
     
 }
