@@ -1,9 +1,9 @@
-package com.example.blog.database;
+package com.example.database;
 
 import java.util.Collections;
 import java.util.List;
 
-import com.example.blog.models.Model;
+import com.example.models.Model;
 
 public interface Manager<T extends Model> {
     public void init();

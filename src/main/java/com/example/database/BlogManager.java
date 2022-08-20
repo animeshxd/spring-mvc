@@ -1,4 +1,4 @@
-package com.example.blog.database;
+package com.example.database;
 
 import java.util.List;
 
@@ -7,7 +7,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.example.blog.models.Blog;
+import com.example.models.Blog;
+
 import jakarta.annotation.PostConstruct;
 
 @Repository("blogs")
