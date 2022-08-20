@@ -59,6 +59,17 @@
 		color: black;
 		
 	}
+	.dropdown-menu > li:hover {
+		color: black;
+		background-color: bisque;
+
+	}
+	.dropdown-menu > li{
+		font-weight: bold;
+	}
+	.dropdown-menu {
+		background-color: cornsilk;
+	}
 	
 </style>
 </head>
@@ -67,6 +78,22 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="./" class="nav-link">Home</a></li>
 			<li><a href="create" class="nav-link">Create Blog Post</a></li>
+			<c:if test="${empty author}">
+			<li><a href="../author/login" class="nav-link">Sign in</a></li>
+			</c:if>
+			<c:if test="${not empty author}">
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Account
+					  </a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-item-text">${author.name}</li>
+						<li class="dropdown-item"><a href="../author/logout" class="nav-link">Sign out</a></li>
+					</ul>
+				</li>
+				
+			</c:if>
 		</ul>
 	</nav>
 	<div class="post">
@@ -77,6 +104,7 @@
 		<h4>${fn:escapeXml(blog.title)}</h4>
 		<p>${fn:escapeXml(blog.content)}</p>
 		<span>
+			<span class="">${blog.author} </span>
 			<a class="custom" href="delete?id=${blog.id}">delete</a>
 			<a class="custom" href="edit?id=${blog.id}">edit</a>
 		</span>

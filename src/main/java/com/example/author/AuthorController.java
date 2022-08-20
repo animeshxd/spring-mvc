@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.database.Manager;
 import com.example.models.Author;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @Controller
@@ -66,7 +67,9 @@ public class AuthorController {
 	@PostMapping("/login")
 	public String login(@RequestParam("username") String username,
 						@RequestParam("password") String password,
-						Model model
+						Model model,
+						HttpServletRequest req,
+						RedirectAttributes ra // eat all redirect attributes 
 					   )	
 	{
 		model.addAttribute("username", username);
@@ -79,7 +82,8 @@ public class AuthorController {
 		if (!author.password.equals(password)){
 			model.addAttribute("error", "password mismatch"); 
 			return "author/login.jsp";
-		}		
+		}
+		req.getSession().setAttribute("author", author);
 		return "redirect:../blog/";
 	}
 
@@ -87,6 +91,12 @@ public class AuthorController {
 	public String update() {
 
 		return "author/";
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request){
+		request.getSession().invalidate();
+		return "redirect:../blog/";
 	}
 	
 }

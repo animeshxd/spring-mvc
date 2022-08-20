@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.database.Manager;
+import com.example.models.Author;
 import com.example.models.Blog;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/blog")
@@ -32,7 +35,11 @@ public class App {
 	
 	
 	@GetMapping("/create")
-	public String create(Model model) {
+	public String create(Model model, HttpServletRequest request) {
+		var author = request.getSession().getAttribute("author");
+		if (author == null){
+			return "redirect:../author/login";
+		}
 		var id = UUID.randomUUID().toString();
 		model.addAttribute("id", id);
 		var blog = blogs.read(id);
@@ -42,10 +49,19 @@ public class App {
 	}
 	
 	@PostMapping("/create")
-	public String addblog(
-			@ModelAttribute("blog") Blog blog,
-			Model model
-			) throws Exception {
+	public String addblog(@ModelAttribute("blog") @Valid Blog blog, Model model, 
+						HttpServletRequest request ,
+						RedirectAttributes ra // eat all current scope params for redirect
+						)
+	
+	throws Exception 
+	{
+		var author = (Author)request.getSession().getAttribute("author");
+		if (author == null){
+			return "redirect:../author/login";
+		}
+
+		blog.setAuthor(author.username);
 		blogs.create(blog);
 		model.addAttribute("success", true);
 		return "blog/post.jsp";

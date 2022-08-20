@@ -3,6 +3,8 @@ package com.example.models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class Blog extends Model{
 	
 	public Blog(String id, String title, String content, String author) {
@@ -11,11 +13,13 @@ public class Blog extends Model{
 		this.content = content;
 		this.author = author;
 	}
-	
+	@NotEmpty
 	public String id;
+	@NotEmpty
 	public String title;
+	@NotEmpty
 	public String content;
-	public String author = "guest";
+	public String author;
 	
 	public Blog(ResultSet rs) {
 		try {
