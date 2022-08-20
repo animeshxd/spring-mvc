@@ -2,7 +2,7 @@ CATALINA_HOME=/home/user/.local/opt/apache-tomcat-10.0.23/
 
 [ -d $CATALINA_HOME ] || exit 5
 
-if ! [ -d target ]; then
+if ! [ -d target ] || ! [ -d target/spring-mvc/ ]; then
     echo "running mvn package"
     mvn package
     echo "synchronizing..."
