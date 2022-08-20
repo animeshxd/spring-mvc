@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" defer></script>
 <title>Blog Home</title>
 <style type="text/css">
 	body {
@@ -15,19 +17,20 @@
 		margin: 0px;
 
 	}
-	.nav a {
+	/* .nav a {
 		text-decoration: none;
 		display: inline-block;
 		background-color: teal;
 		color: white;
 		padding: .5em .3em;
-	}
+		margin-right: .5em;
+	} */
 	
-	.nav {
+	/* nav {
 		padding: .5em;
 		background-color: NavajoWhite;
 		
-	}
+	} */
 	.posts h4 {
 		color: maroon;
 	}
@@ -41,7 +44,7 @@
 		color: maroon;
 	}
 	.posts a.custom {
-		font-size: 12px;
+		font-size: 14px;
 	}
 	
 	.success {
@@ -50,15 +53,28 @@
 		background-color: DarkSalmon;
 		border: 12px;
 	}
+	.navbar{
+		background-color: NavajoWhite;
+		color: black ;
+		font-weight: bold;
+		
+	}
+
 
 	
 </style>
 </head>
 <body>
-	<div class="nav">
+	<nav class="navbar navbar-expand-sm pt-1 pb-0 p-2 shadow-sm">
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="./" class="nav-link">Home</a></li>
+			<li><a href="create" class="nav-link">Create Blog Post</a></li>
+		</ul>
+	</nav>
+	<!-- <nav class="nav">
 		<a href="./">Home</a>
 		<a href="create">Create Blog Post</a>
-	</div>
+	</nav> -->
 	
 	<div class="posts">
 		<c:if test="${success}">
