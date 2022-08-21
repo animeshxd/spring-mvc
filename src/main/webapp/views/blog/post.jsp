@@ -70,6 +70,9 @@
 	.dropdown-menu {
 		background-color: cornsilk;
 	}
+	.dropdown-item {
+		padding: 0px 8px 0px 8px;
+	}
 	
 </style>
 </head>

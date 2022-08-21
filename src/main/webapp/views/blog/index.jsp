@@ -71,13 +71,15 @@
 	.dropdown-menu {
 		background-color: cornsilk;
 	}
-
+	.dropdown-item {
+		padding: 0px 8px 0px 8px;
+	}
 
 	
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm pt-1 pb-0 p-2 shadow-sm">
+	<nav class="navbar navbar-expand-sm pb-0 pt-0 shadow-sm">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="./" class="nav-link">Home</a></li>
 			<li><a href="create" class="nav-link">Create Blog Post</a></li>
